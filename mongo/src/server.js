@@ -4,13 +4,16 @@ import apiRouter from './apiRouter';
 
 const app = express();
 
+app.use(express.json({ extended: true }));
+
 app.use('/api', apiRouter);
 
 (async function run() {
     try {
         await mongoose.connect(process.env.MONGO_URL, {
             useNewUrlParser: true,
-            useUnifiedTopology: true
+            useUnifiedTopology: true,
+            useCreateIndex: true
         });
         console.log('Connected to MongoDB successfully!');
         app.listen(8080, () => {

@@ -8,5 +8,8 @@ export const validate = validators => async (request, response, next) => {
         return next();
     }
 
-    response.status(422).json({ errors: errors.array() });
+    response.status(422).json({
+        message: 'Data is not valid',
+        errors: errors.array()
+    });
 };
