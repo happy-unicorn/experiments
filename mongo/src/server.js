@@ -1,13 +1,10 @@
 import express from 'express';
+import rootRouter from './rootRouter';
+
 
 const app = express();
 
-app.get('/test', (request, response) => {
-    const a = 0;
-    response.json({
-       hello: 'world'
-    });
-});
+app.use(rootRouter);
 
 app.listen(8080, () => {
     console.log('Server started!');
