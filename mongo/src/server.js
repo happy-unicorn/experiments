@@ -2,6 +2,13 @@ import express from 'express';
 
 const app = express();
 
-app.listen(process.env.SERVER_PORT, () => {
-    console.log(`Server started on port ${process.env.SERVER_PORT}!`)
+app.get('/test', (request, response) => {
+    const a = 0;
+    response.json({
+       hello: 'world'
+    });
+});
+
+app.listen(8080, () => {
+    console.log('Server started!');
 });
