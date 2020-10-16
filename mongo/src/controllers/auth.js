@@ -13,7 +13,6 @@ export async function register(request, response) {
             password: await bcrypt.hash(password, 10)
         });
         await user.save();
-        console.log('after');
         response.status(201).json({ message: 'User created' });
     } catch (error) {
         response.status(500).json({
@@ -25,22 +24,18 @@ export async function register(request, response) {
 export async function login(request, response) {
     try {
         const { email, password } = request.body;
-        console.log(email);
         const user = await User.findOne({ email });
         if (!user) {
             return response.status(404).json({ message: 'User is not found' })
         }
-        console.log(email+ '2');
         if (!await bcrypt.compare(password, user.password)) {
             return response.status(401).json({ message: 'Wrong password' })
         }
-        console.log(process.env.JWT_SECRET_KEY);
         const token = await jsonwebtoken.sign(
             { userId: user.id },
             process.env.JWT_SECRET_KEY,
             { expiresIn: process.env.JWT_EXPIRES_IN}
         );
-        console.log(token);
         response.json({
             token
         })
