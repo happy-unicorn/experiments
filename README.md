@@ -5,8 +5,10 @@
 "Experiments"'s structure
 ```bash
 experiments/
-├── angular
-└── mongo
+├── hooks
+└── mongo/
+    ├── client
+    └── server
 ```
 
 ## Authors
