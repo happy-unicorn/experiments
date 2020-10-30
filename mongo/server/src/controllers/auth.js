@@ -37,6 +37,7 @@ export async function login(request, response) {
             { expiresIn: process.env.JWT_EXPIRES_IN}
         );
         response.json({
+            userId: user.id,
             token
         })
     } catch (error) {

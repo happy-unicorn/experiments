@@ -2,7 +2,7 @@ import React from 'react';
 
 const LinksPage = () => {
     return (
-        <div>LinksPage</div>
+        <h1>LinksPage</h1>
     );
 };
 
