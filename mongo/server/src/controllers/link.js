@@ -10,7 +10,8 @@ export async function create(req, res) {
             return res.status(400).json({ message: 'Link already exists' });
         }
 
-        const to = process.env.EXPRESS_URL + '/t/' + shortid.generate();
+        const code = shortid.generate();
+        const to = process.env.EXPRESS_URL + '/t/' + code;
 
         const link = new Link({
             code, to, from, owner: req.user.userId
@@ -20,6 +21,7 @@ export async function create(req, res) {
 
         res.status(201).json({ link });
     } catch (error) {
+        console.log(error);
         res.status(500).json({
             message: "Something went wrong"
         });
