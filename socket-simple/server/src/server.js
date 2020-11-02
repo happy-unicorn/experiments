@@ -1,10 +1,11 @@
+import http from 'http';
 import express from 'express';
+import socket from 'socket.io';
 import mongoose from 'mongoose';
 
 const app = express();
-
-app.use(express.json({ extended: true }));
-
+const server = http.createServer(app);
+const io = socket(server);
 (async function run() {
     try {
         await mongoose.connect(process.env.MONGO_URL, {
@@ -13,7 +14,7 @@ app.use(express.json({ extended: true }));
             useCreateIndex: true
         });
         console.log('Connected to MongoDB successfully!');
-        app.listen(8080, () => {
+        server.listen(8080, () => {
             console.log('Server started in Docker container!');
         });
     } catch (error) {
@@ -21,3 +22,19 @@ app.use(express.json({ extended: true }));
         process.exit(1);
     }
 })();
+
+const rooms = new Map([
+
+]);
+
+app.get('/rooms', (req, res) => {
+    res.json(rooms);
+});
+
+io.on('connect', (socket) => {
+    console.log('connect');
+
+    socket.on('disconnect', () => {
+        console.log('disconnect');
+    });
+});

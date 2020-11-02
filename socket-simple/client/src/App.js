@@ -1,8 +1,21 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
+import Join from './components/Join';
+import SocketContext from './context/SocketContext';
+import './App.css';
 
 const App = () => {
+  const { socket } = useContext(SocketContext);
+
+  useEffect(() => {
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
+
   return (
-    <h1>hello world</h1>
+    <div className='wrapper'>
+        <Join/>
+    </div>
   );
 };
 
