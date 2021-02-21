@@ -8,25 +8,20 @@ const app = new Application({
 });
 
 app.loader.add('cat', 'sprites/cat.png').load((loader, resources) => {
-    // This creates a texture from a 'bunny.png' image
-    const cat = new Sprite(resources.cat.texture);
+  const cat = new Sprite(resources.cat.texture);
 
-    // Setup the position of the bunny
-    cat.x = app.renderer.width / 2;
-    cat.y = app.renderer.height / 2;
+  cat.x = app.renderer.width / 2;
+  cat.y = app.renderer.height / 2;
+  cat.scale.x = 0.25;
+  cat.scale.y = 0.25;
+  cat.anchor.x = 0.5;
+  cat.anchor.y = 0.5;
 
-    // Rotate around the center
-    cat.anchor.x = 0.5;
-    cat.anchor.y = 0.5;
+  app.stage.addChild(cat);
 
-    // Add the bunny to the scene we are building
-    app.stage.addChild(cat);
-    // Listen for frame updates
-    app.ticker.add(() => {
-         // each frame we spin the bunny around a bit
-        cat.rotation += 0.01;
-        // cat.visible = !cat.visible;
-    });
+  app.ticker.add(() => {
+    cat.rotation += 0.01;
+  });
 });
 
 document.body.appendChild(app.view);
