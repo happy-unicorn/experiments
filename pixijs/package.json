@@ -5,11 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack serve"
+    "start": "webpack serve --hot"
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "normalize.css": "^8.0.1",
+    "pixi.js": "^5.3.8"
+  },
   "devDependencies": {
     "@babel/core": "^7.12.17",
     "@babel/preset-env": "^7.12.17",
